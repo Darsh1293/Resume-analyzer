@@ -93,9 +93,17 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Debug: Log the data received from the server
             console.log('Data received from server:', data);
+            console.log('Match percentage:', data.match_percentage);
+            console.log('Match chart data:', data.match_chart);
             console.log('Skills found:', data.skills_found);
             console.log('Skills missing:', data.skills_missing);
             console.log('Suggestions:', data.suggestions);
+            
+            // Debug all properties in the data object
+            console.log('All properties in data:');
+            for (const prop in data) {
+                console.log(`${prop}: ${JSON.stringify(data[prop])}`);
+            }
             
             // Display results
             displayResults(data);
@@ -123,9 +131,17 @@ document.addEventListener('DOMContentLoaded', function() {
  * @param {Object} data - Analysis results from the server
  */
 function displayResults(data) {
-    // Display match score
-    document.getElementById('match-score').textContent = data.match_percentage + '%';
-    console.log('Match percentage:', data.match_percentage);
+    // Display match score - handle both formats for compatibility
+    if (data.match_percentage !== undefined) {
+        document.getElementById('match-score').textContent = data.match_percentage + '%';
+        console.log('Using match_percentage:', data.match_percentage);
+    } else if (data.match_chart && data.match_chart.overall_match !== undefined) {
+        document.getElementById('match-score').textContent = data.match_chart.overall_match + '%';
+        console.log('Using match_chart.overall_match:', data.match_chart.overall_match);
+    } else {
+        document.getElementById('match-score').textContent = '0%';
+        console.log('No match score found, defaulting to 0%');
+    }
     
     // Display skills found
     const skillsFoundElement = document.getElementById('skills-found');

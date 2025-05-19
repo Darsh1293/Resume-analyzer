@@ -124,7 +124,8 @@ document.addEventListener('DOMContentLoaded', function() {
  */
 function displayResults(data) {
     // Display match score
-    document.getElementById('match-score').textContent = data.match_score + '%';
+    document.getElementById('match-score').textContent = data.match_percentage + '%';
+    console.log('Match percentage:', data.match_percentage);
     
     // Display skills found
     const skillsFoundElement = document.getElementById('skills-found');

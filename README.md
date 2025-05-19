@@ -2,6 +2,10 @@
 
 A web-based application that analyzes resumes against job descriptions to provide match scores and improvement suggestions.
 
+## Live Demo
+
+[Try the Resume Analyzer here](https://resume-analyzer-three-kappa.vercel.app/)
+
 ## Features
 
 - Resume upload functionality (PDF/DOCX)
